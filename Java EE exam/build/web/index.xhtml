@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <style type="text/css">
+            table {border-collapse: collapse; text-align: center}
+            table,td,th {
+                border: 1px solid grey;
+                padding: 8px;}
+            th {background-color: silver}
+        </style>
+    </h:head>
+    <h:body>
+        <h1 style="color:grey">TELEFONSZÁM NYILVÁNTARTÓ RENDSZER</h1>
+        <h:form>
+            
+            Keresés név szerint: <h:inputText value="#{listazo.kereses}"
+                                              style="width:200px"/>
+            <h:commandButton value="Keresés" style="width:100px"/><p/>
+            
+            <h:commandButton value="ÚJ KONTAKT FELVÉTELE" style="width:250px" 
+                             action="#{listazo.ujKontakt()}"/>
+            <p/>
+            <h:dataTable value="#{listazo.kontaktok}" var="con">
+                <h:column>
+                    <f:facet name="header">
+                        Név
+                    </f:facet>
+                    #{con.name}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        E-mail
+                    </f:facet>
+                    #{con.email}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        Születési dátum
+                    </f:facet>
+                    #{con.birthdate}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        Műveletek
+                    </f:facet>
+                    <h:commandButton value="Telefonszámok" 
+                                     action="#{listazo.kontaktKivalaszt(con)}"/>
+                    <h:commandButton value="Új telefonszám" 
+                                     action="#{listazo.telefonUj()}"/>
+                    <h:commandButton value="Szerkesztés" 
+                                     action="#{listazo.kontaktSzerkeszt(con)}"/>
+                   
+                </h:column>
+
+            </h:dataTable><p/>
+            
+             <h:dataTable value="#{listazo.telefonszamok}" var="tel"
+                          rendered="#{listazo.kivalasztottKontakt!=null}">
+                 <h:column>
+                    <f:facet name="header">
+                       #{listazo.kivalasztottKontakt.name} telefonszáma(i)
+                    </f:facet>
+                    #{tel.number}
+                </h:column>
+                 
+                 <h:column>
+                    <f:facet name="header">
+                        Típus
+                    </f:facet>
+                    #{tel.type}
+                </h:column>
+                
+                 <h:column>
+                    <f:facet name="header">
+                        Műveletek
+                    </f:facet>
+                     <h:commandButton value="Szerkesztés" 
+                                      action="#{listazo.telefonSzerkeszt(tel)}"/>
+                     <h:commandButton value="Törlés" 
+                                      action="#{listazo.telefonTorol(tel)}"/>
+                </h:column>
+                
+            </h:dataTable>
+            
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+    </h:head>
+    <h2 style="color:grey">TELEFONSZÁMOK</h2>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                Telefonszám: <h:inputText value="#{listazo.kivalasztottTelefonszamok.number}"/>
+                Típus: <h:selectOneMenu value="#{listazo.kivalasztottTelefonszamok.type}">
+                    <f:selectItems value="#{listazo.tipusok}"/>
+                </h:selectOneMenu>
+                <h:commandButton value="Mégsem" action="index" immediate="true"/>
+                <h:commandButton value="Mentés" action="#{listazo.telefonMent()}"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
